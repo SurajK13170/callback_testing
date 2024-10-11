@@ -34,7 +34,60 @@ async function getAccessToken() {
 }
 
 app.post('/', async (req, res) => {
-   const consentRequestPayload = req.body;
+   const consentRequestPayload = {
+        "consent": {
+            "hip": {
+                "id": "LFga4R7HkVWcLG9hK6AC"
+            },
+            "hiu": {
+                "id": uuidv4()
+            },
+            "hiTypes": [
+                "Prescription",
+                "DiagnosticReport",
+                "DischargeSummary",
+                "ImmunizationRecord",
+                "HealthDocumentRecord",
+                "WellnessRecord",
+                "OPConsultation"
+            ],
+            "patient": {
+                "id": "surajkumar292001@sbx"
+            },
+            "purpose": {
+                "code": "CAREMGT",
+                "text": "Care Management",
+                "refUri": "www.abdm.gov.in"
+            },
+            "requester": {
+                "name": "Dr. Manju",
+                "identifier": {
+                    "type": "REGNO",
+                    "value": "MH1001",
+                    "system": "https://www.mciindia.org"
+                }
+            },
+            "permission": {
+                "dateRange": {
+                    "from": "1924-07-09T12:05:57.151Z",
+                    "to": "2024-07-17T12:05:57.151Z"
+                },
+                "frequency": {
+                    "unit": "DAY",
+                    "value": 0,
+                    "repeats": 0
+                },
+                "accessMode": "VIEW",
+                "dataEraseAt": "2124-07-09T00:00:00.000Z"
+            },
+            "careContexts": [
+                {
+                    "patientReference": "surajkumar292001@sbx",
+                    "careContextReference": "COCa496bc2f-ca6c-4af5-b973-02e915fd9815"
+                }
+            ]
+        }
+    };
     try {
         // Fetch access token
         const accessToken = await getAccessToken();
